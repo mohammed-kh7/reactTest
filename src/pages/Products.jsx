@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { fetchProducts } from '../api/products.api';
 import { useDebounce } from '../hooks/useDebounce';
-import Input from '../components/ui/Input';
 import LoadingSkeleton from '../components/skeleton/LoadingSkeleton';
 import EmptyState from '../components/common/EmptyState';
 import Card from '../components/ui/Card';
@@ -12,7 +11,11 @@ import Button from '../components/ui/Button';
 const ITEMS_PER_PAGE = 8;
 
 const Products = () => {
-  const [search, setSearch] = useState('');
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const urlSearch = searchParams.get('q') || '';
+
+  const [search, setSearch] = useState(urlSearch);
   const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(search, 400);
 
@@ -34,8 +37,10 @@ const Products = () => {
 
   if (error) {
     return (
-      <div className="error-alert">
-        <p>Failed to load products. Please try again later.</p>
+      <div className="main-container">
+        <div className="error-alert">
+          <p>Failed to load products. Please try again later.</p>
+        </div>
       </div>
     );
   }
@@ -48,15 +53,24 @@ const Products = () => {
       </div>
 
       <div className="search-bar">
-        <Input
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setCurrentPage(1);
-          }}
-          type="search"
-        />
+        <form className="search-form" onSubmit={(e) => { e.preventDefault(); }}>
+          <div className="search-input-wrapper">
+            <svg className="search-icon-small" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+            <input
+              type="search"
+              placeholder="Search products..."
+              className="search-field"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+          </div>
+        </form>
       </div>
 
       {products.length === 0 ? (
