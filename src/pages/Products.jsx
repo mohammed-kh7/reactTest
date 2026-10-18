@@ -41,7 +41,7 @@ const Products = () => {
   }
 
   return (
-    <div className="products-page">
+    <div className="main-container">
       <div className="page-header">
         <h1>Products</h1>
         <p>Browse our full catalog — {total} products found</p>

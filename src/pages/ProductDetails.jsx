@@ -18,24 +18,28 @@ const ProductDetails = () => {
 
   if (error) {
     return (
-      <div className="error-alert">
-        <p>Failed to load product details.</p>
-        <Button onClick={() => navigate(-1)}>Go Back</Button>
+      <div className="main-container">
+        <div className="error-alert">
+          <p>Failed to load product details.</p>
+          <Button onClick={() => navigate(-1)}>Go Back</Button>
+        </div>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="empty-state">
-        <p>Product not found.</p>
-        <Button onClick={() => navigate('/products')}>Back to Products</Button>
+      <div className="main-container">
+        <div className="empty-state">
+          <p>Product not found.</p>
+          <Button onClick={() => navigate('/products')}>Back to Products</Button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="product-details">
+    <div className="main-container">
       <Button onClick={() => navigate(-1)}>← Back</Button>
 
       <div className="product-detail-card">
@@ -61,7 +65,7 @@ const ProductDetails = () => {
           </div>
           <div className="product-meta">
             <span className="badge">★ {product.rating} / 5</span>
-            <span className="badge">{product.stock} in stock</span>
+            <span className="badge">库存: {product.stock} 件</span>
             <span className="badge">SKU: {product.sku}</span>
           </div>
           <p className="product-description">{product.description}</p>

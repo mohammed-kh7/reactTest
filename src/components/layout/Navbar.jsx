@@ -33,6 +33,14 @@ const Navbar = () => {
                 className="search-input"
                 autoFocus
                 onBlur={() => setSearchOpen(false)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    const value = e.target.value;
+                    if (value.trim()) {
+                      window.location.href = `/products?q=${encodeURIComponent(value)}`;
+                    }
+                  }
+                }}
               />
               <button className="search-close" onClick={() => setSearchOpen(false)}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
