@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
-import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 
 const Home = () => {
@@ -14,8 +13,6 @@ const Home = () => {
 
   return (
     <div className="app-wrapper">
-      <Navbar />
-
       <main className="main-container">
         <div className="page-header">
           <h1>React Store - Products Demo</h1>
