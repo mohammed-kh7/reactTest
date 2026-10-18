@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchProducts } from '../api/products.api';
 import { useDebounce } from '../hooks/useDebounce';
 import LoadingSkeleton from '../components/skeleton/LoadingSkeleton';
@@ -12,12 +12,19 @@ const ITEMS_PER_PAGE = 8;
 
 const Products = () => {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const [searchParams, setSearchParams] = useSearchParams();
   const urlSearch = searchParams.get('q') || '';
 
   const [search, setSearch] = useState(urlSearch);
   const [currentPage, setCurrentPage] = useState(1);
   const debouncedSearch = useDebounce(search, 400);
+
+  // Sync local search state with URL params
+  useEffect(() => {
+    if (urlSearch !== search) {
+      setSearch(urlSearch);
+    }
+  }, [urlSearch]);
 
   const skip = (currentPage - 1) * ITEMS_PER_PAGE;
 

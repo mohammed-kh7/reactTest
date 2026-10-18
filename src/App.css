@@ -342,19 +342,13 @@ body {
 }
 
 /* Search in Navbar */
-.navbar-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.search-wrapper {
+.search-wrapper-inline {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.search-icon {
+.search-icon-inline {
   color: #94a3b8;
   position: absolute;
   left: 12px;
@@ -378,25 +372,19 @@ body {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
 }
 
-.navbar-search-input::placeholder {
-  color: #64748b;
-}
-
-.search-toggle {
+.search-toggle-icon {
   background: none;
   border: none;
   color: #94a3b8;
   cursor: pointer;
   padding: 8px;
-  border-radius: 8px;
   display: flex;
   align-items: center;
-  transition: color 0.2s, background-color 0.2s;
+  transition: color 0.2s;
 }
 
-.search-toggle:hover {
+.search-toggle-icon:hover {
   color: #60a5fa;
-  background-color: rgba(96, 165, 250, 0.1);
 }
 
 /* Search in Products Page */
