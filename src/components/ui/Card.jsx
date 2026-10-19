@@ -1,0 +1,26 @@
+import React from 'react';
+
+const Card = ({ title, description, image, children }) => {
+  return (
+    <div className="custom-card">
+      {image && (
+        <div className="card-image-wrapper">
+          <img
+            src={image}
+            alt={title}
+            className="card-image"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
+      <div className="card-body">
+        {title && <h3 className="card-title">{title}</h3>}
+        {description && <p className="card-description">{description}</p>}
+      </div>
+      {children && <div className="card-footer">{children}</div>}
+    </div>
+  );
+};
+
+export default Card;
